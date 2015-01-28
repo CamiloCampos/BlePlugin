@@ -272,6 +272,7 @@ namespace webworks {
     void *SimpleBtLeHrPlugin_NDK::scanForDevices()
     {
         LOGD("In scanForDevices()");
+        LOGI("In scanForDevices() I");
 
         bt_disc_start_inquiry(BT_INQUIRY_GIAC);
 
@@ -299,32 +300,32 @@ namespace webworks {
 
                 if ((device_type == BT_DEVICE_TYPE_LE_PUBLIC) || (device_type == BT_DEVICE_TYPE_LE_PRIVATE)) {
                     LOGD("Got a Bluetooth LE device\n");
-                    char **services_array = bt_rdev_get_services_gatt(remote_device);
-                    if (services_array) {
-                        LOGD("Enumerating services on device\n");
-                        int j;
-                        for (j = 0; services_array[j]; j++) {
-                            LOGD("Found service: %s\n", services_array[j]);
-                            if (strcmpi(services_array[j], HEART_RATE_SERVICE_UUID) == 0) {
+//                    char **services_array = bt_rdev_get_services_gatt(remote_device);
+//                    if (services_array) {
+//                        LOGD("Enumerating services on device\n");
+//                        int j;
+//                        for (j = 0; services_array[j]; j++) {
+//                            LOGD("Found service: %s\n", services_array[j]);
+//                            if (strcmpi(services_array[j], HEART_RATE_SERVICE_UUID) == 0) {
                                 device_index = device_count++;
                                 bt_rdev_get_address(remote_device, device_info[device_index].address);
                                 LOGD("Address=%s\n", device_info[device_index].address);
                                 bt_rdev_get_friendly_name(remote_device, device_info[device_index].name, sizeof(device_info[device_index].name));
                                 LOGD("Name=%s\n", device_info[device_index].name);
-                            }
-                            number_of_services++;
-                        }
-                        bt_rdev_free_services(services_array);
-                    } else {
-                        LOGD("Unable to get service list - errno: %s\n", strerror(errno));
-                    }
+//                            }
+//                            number_of_services++;
+//                        }
+//                        bt_rdev_free_services(services_array);
+//                    } else {
+//                        LOGD("Unable to get service list - errno: %s\n", strerror(errno));
+//                    }
                 }
             }
             LOGD("Freeing remote device array");
             bt_rdev_free_array(remote_device_array);
         }
 
-        LOGD("device_count=%d", device_count);
+//        LOGD("device_count=%d", device_count);
 
         Json::FastWriter writer;
         Json::Value root;
