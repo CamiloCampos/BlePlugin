@@ -63,6 +63,7 @@
 typedef struct _bt_device_information_t {
     char address[DEVICE_INFO_ADDR_SIZE+1]; // '\0' terminated string
     char name[DEVICE_INFO_BUFF_SIZE+1];    // '\0' terminated string
+    int  rssi;
 } bt_device_information_t;
 
 typedef struct _event_names_t {

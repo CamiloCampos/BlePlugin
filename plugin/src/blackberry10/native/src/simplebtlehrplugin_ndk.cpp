@@ -309,9 +309,11 @@ namespace webworks {
 //                            if (strcmpi(services_array[j], HEART_RATE_SERVICE_UUID) == 0) {
                                 device_index = device_count++;
                                 bt_rdev_get_address(remote_device, device_info[device_index].address);
-                                LOGD("Address=%s\n", device_info[device_index].address);
+                                LOGD("Address==>>%s\n", device_info[device_index].address);
                                 bt_rdev_get_friendly_name(remote_device, device_info[device_index].name, sizeof(device_info[device_index].name));
-                                LOGD("Name=%s\n", device_info[device_index].name);
+                                LOGD("Name==>>%s\n", device_info[device_index].name);
+                                bt_rdev_get_rssi(remote_device,&device_info[device_index].rssi);
+                                LOGD("Rssi==>>%d\n",device_info[device_index].rssi);
 //                            }
 //                            number_of_services++;
 //                        }
